@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\Bundle\Modules\Admin\Controllers;
 
+use Marktic\Credentials\Bundle\Modules\Admin\Controllers\Behaviours\HasTenantControllerTrait;
 use Marktic\Credentials\Bundle\Modules\Admin\Forms\CredentialRequirements\DetailsForm;
 use Marktic\Credentials\CredentialRequirements\Models\CredentialRequirement;
 use Marktic\Credentials\Utility\CredentialsModels;
@@ -15,6 +16,13 @@ use Marktic\Credentials\Utility\CredentialsModels;
 trait CredentialsRequirementsControllerTrait
 {
     use AbstractCredentialsControllerTrait;
+    use HasTenantControllerTrait;
+
+    protected function afterActionUrlDefault($type, $item = null)
+    {
+        $parent = $item->getParentRecord();
+        return $parent->getURL();
+    }
 
     protected function generateModelName(): string
     {

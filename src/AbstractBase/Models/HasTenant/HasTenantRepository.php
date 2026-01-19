@@ -11,15 +11,15 @@ trait HasTenantRepository
     public function initRelations()
     {
         parent::initRelations();
-        $this->initRelationsSequence();
+        $this->initRelationsCredentials();
     }
 
-    protected function initRelationsSequence(): void
+    protected function initRelationsCredentials(): void
     {
-        $this->initRelationsSequenceTenant();
+        $this->initRelationsCredentialsTenant();
     }
 
-    protected function initRelationsSequenceTenant(): void
+    protected function initRelationsCredentialsTenant(): void
     {
         $this->morphTo('Tenant', ['morphPrefix' => 'tenant', 'morphTypeField' => 'tenant']);
     }

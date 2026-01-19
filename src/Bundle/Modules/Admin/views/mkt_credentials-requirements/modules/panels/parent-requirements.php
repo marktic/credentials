@@ -10,16 +10,16 @@ $pagesRepository = CredentialsModels::requirements();
 
 $card = Card::make()
     ->withView($this)
-    ->withTitle($pagesRepository->getLabel('title.singular'))
+    ->withTitle($pagesRepository->getLabel('title'))
     ->withIcon(Icons::list_ul())
     ->addHeaderTool(
         ButtonAction::make()
             ->setUrl($this->credentialsRequirementsAdd)
             ->addHtmlClass('btn-xs')
-            ->setLabel(translator()->trans('edit'))
+            ->setLabel(translator()->trans('add'))
     )
 //    ->themeSuccess()
     ->wrapBody(false)
-    ->withViewContent('/' . $pagesRepository->getController() . '/modules/item/details', ['item' => $this->item]);
+    ->withViewContent('/' . $pagesRepository->getController() . '/modules/lists/parent');
 ?>
 <?= $card ?>

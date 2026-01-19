@@ -3,14 +3,15 @@
 use Marktic\Credentials\AbstractBase\Actions\BoolPropertyLabel;
 use Marktic\Credentials\CredentialRequirements\Models\CredentialRequirement;
 use Marktic\Credentials\Utility\CredentialsModels;
+use Nip\Records\Collections\Associated;
 
-/** @var CredentialRequirement[] $items */
+/** @var CredentialRequirement[]|Associated $items */
 $items = $this->credentialsRequirements;
 $requirementsRepository = CredentialsModels::requirements();
 ?>
 
 <?php if ($items->count() === 0): ?>
-    <?= $requirementsRepository->getMessage('dnx'); ?>
+    <?= $this->Messages()->info($requirementsRepository->getMessage('dnx')); ?>
     <?php return; ?>
 <?php endif; ?>
 

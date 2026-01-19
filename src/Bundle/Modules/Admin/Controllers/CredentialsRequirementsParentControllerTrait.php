@@ -19,8 +19,8 @@ trait CredentialsRequirementsParentControllerTrait
     {
         $requirements = FindRequirementsByParent::for($parent)->fetch();
         $credentialsRequirementsAdd = CredentialsModels::requirements()->compileURL('add', [
-            'parent_type' => $parent->getRecordType(),
-            'parent_id' => $parent->getId(),
+            'parent_type' => $parent->getManager()->getMorphName(),
+            'parent_id' => $parent->id,
         ]);
 
         $this->payload()->with([

@@ -44,27 +44,54 @@ class DetailsForm extends FormModel
 
     protected function initializeCredentialType()
     {
-        $types = CredentialsModels::typesClass();
+        $types = CredentialsModels::types();
         $items = $types->findAll();
 
         $this->addSelect('credential_type_id', translator()->trans('mkt_credentials-requirements.fields.credential_type'), true);
+        $credentialTypeElement = $this->getElement('credential_type_id');
         foreach ($items as $item) {
-            $this->getElement('credential_type_id')->addOption($item->id, $item->getName());
+            $credentialTypeElement->addOption($item->id, $item->getName());
         }
     }
 
     protected function initializeIsMandatory()
     {
-        $this->addCheckbox('is_mandatory', translator()->trans('mkt_credentials-requirements.fields.is_mandatory'));
+        $this->initializeBooleanField('is_mandatory','is_active');
     }
 
     protected function initializeRequiresApproval()
     {
-        $this->addCheckbox('requires_approval', translator()->translate('mkt_credentials-requirements.fields.requires_approval'));
+        $this->initializeBooleanField('requires_approval', 'is_active');
     }
 
     protected function initializeIsActive()
     {
-        $this->addCheckbox('is_active', translator()->trans('mkt_credentials-requirements.fields.is_active'));
+        $this->initializeBooleanField('is_active', 'is_active');
+    }
+
+    protected function initializeBooleanField(string $fieldName, string $labelKey): void
+    {
+        $this->addBsRadioGroup($fieldName, $this->getModelManager()->getLabel($labelKey));
+        $element = $this->getElement($fieldName);
+        $element->addOption('yes', translator()->trans('yes'));
+        $element->addOption('no', translator()->trans('no'));
+    }
+
+    protected function getDataFromModel()
+    {
+        parent::getDataFromModel();
+        foreach ([] as $field) {
+            $value = $this->getModel()->{$field} ? 'yes' : 'no';
+            $this->getElement($field)->setValue($value);
+        }
+    }
+
+    public function saveToModel()
+    {
+        parent::saveToModel();
+        foreach (['is_mandatory', 'requires_approval', 'is_active'] as $field) {
+            $value = $this->getElement($field)->getValue() === 'yes' ? 1 : 0;
+            $this->getModel()->{$field} = $value;
+        }
     }
 }
