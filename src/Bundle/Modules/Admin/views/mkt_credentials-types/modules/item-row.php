@@ -15,7 +15,7 @@ $item = $item ?? null;
         <?= $item->getLabel(); ?>
     </td>
     <td>
-        <span class="badge badge-<?= $item->isActive() ? 'success' : 'secondary' ?>">
+        <span class="badge text-bg-<?= $item->isActive() ? 'success' : 'secondary' ?>">
             <?= $item->isActive() ? 'Active' : 'Inactive' ?>
         </span>
     </td>

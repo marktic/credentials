@@ -15,9 +15,10 @@ class DetailsForm extends FormModel
 
         $this->initializeName();
         $this->initializeLabel();
-        $this->initializeLead();
         $this->initializeDescription();
         $this->initializeActive();
+
+        $this->addButton('save', translator()->trans('submit'));
     }
 
     protected function initializeName()
@@ -30,22 +31,15 @@ class DetailsForm extends FormModel
         $this->addInput('label', translator()->trans('label'), true);
     }
 
-    protected function initializeLead()
-    {
-        $this->addTextMiniEditor('lead', translator()->trans('lead'), true);
-    }
-
     protected function initializeDescription()
     {
         $this->addTexteditor('description', translator()->trans('description'), true);
     }
     protected function initializeActive()
     {
-        $this->addRadioGroup('active', translator()->trans('active'), true);
+        $this->addRadioGroup('active', translator()->trans('active'), false);
         $activeElement = $this->getElement('active');
-        $activeElement->setOptions([
-            1 => translator()->trans('yes'),
-            0 => translator()->trans('no'),
-        ]);
+        $activeElement->addOption('1', translator()->trans('yes'));
+        $activeElement->addOption('0', translator()->trans('no'));
     }
 }

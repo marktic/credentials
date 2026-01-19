@@ -29,6 +29,11 @@ class CredentialType extends CredentialsRecord
         return $this->label;
     }
 
+    public function getLead()
+    {
+        return $this->lead;
+    }
+
     public function isActive(): bool
     {
         return (bool)$this->is_active;

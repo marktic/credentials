@@ -31,20 +31,11 @@ $item = $item ?? $this->page;
             <?= translator()->trans('active'); ?>
         </td>
         <td>
-            <span class="badge badge-<?= $item->isActive() ? 'success' : 'secondary' ?>">
+            <span class="badge text-bg-<?= $item->isActive() ? 'success' : 'secondary' ?>">
                 <?= $item->isActive() ? 'Active' : 'Inactive' ?>
             </span>
         </td>
     </tr>
-    <tr>
-        <td>
-            <?= translator()->trans('lead'); ?>
-        </td>
-        <td>
-            <?= $item->getLead(); ?>
-        </td>
-    </tr>
-
     <tr>
         <td>
             <?= translator()->trans('description'); ?>

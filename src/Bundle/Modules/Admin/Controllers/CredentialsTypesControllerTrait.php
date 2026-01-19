@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\Bundle\Modules\Admin\Controllers;
 
+use Marktic\Credentials\Bundle\Modules\Admin\Forms\CredentialsTypes\DetailsForm;
 use Marktic\Credentials\Utility\CredentialsModels;
 
 /**
@@ -13,6 +14,11 @@ use Marktic\Credentials\Utility\CredentialsModels;
 trait CredentialsTypesControllerTrait
 {
     use AbstractCredentialsControllerTrait;
+
+    protected function getModelFormClass($model, $action = null): string
+    {
+        return DetailsForm::class;
+    }
 
     protected function generateModelName(): string
     {
