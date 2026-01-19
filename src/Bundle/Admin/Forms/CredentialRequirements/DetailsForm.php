@@ -33,12 +33,12 @@ class DetailsForm extends AbstractForm
 
     protected function initializeName()
     {
-        $this->addInput('name', translator()->translate('general.fields.name'), true);
+        $this->addInput('name', translator()->translate('mkt_credentials-requirements.fields.name'), true);
     }
 
     protected function initializeLead()
     {
-        $this->addTextarea('lead', translator()->translate('general.fields.description'));
+        $this->addTextarea('lead', translator()->translate('mkt_credentials-requirements.fields.lead'));
     }
 
     protected function initializeCredentialType()
@@ -46,24 +46,24 @@ class DetailsForm extends AbstractForm
         $types = CredentialsModels::typesClass();
         $items = $types->findAll();
 
-        $this->addSelect('credential_type_id', translator()->translate('general.fields.type'), true);
+        $this->addSelect('credential_type_id', translator()->translate('mkt_credentials-requirements.fields.credential_type'), true);
         foreach ($items as $item) {
-            $this->getElement('credential_type_id')->addOption($item->getName(), $item->id);
+            $this->getElement('credential_type_id')->addOption($item->id, $item->getName());
         }
     }
 
     protected function initializeIsMandatory()
     {
-        $this->addCheckbox('is_mandatory', translator()->translate('general.fields.mandatory'));
+        $this->addCheckbox('is_mandatory', translator()->translate('mkt_credentials-requirements.fields.is_mandatory'));
     }
 
     protected function initializeRequiresApproval()
     {
-        $this->addCheckbox('requires_approval', translator()->translate('general.fields.requires_approval'));
+        $this->addCheckbox('requires_approval', translator()->translate('mkt_credentials-requirements.fields.requires_approval'));
     }
 
     protected function initializeIsActive()
     {
-        $this->addCheckbox('is_active', translator()->translate('general.fields.active'));
+        $this->addCheckbox('is_active', translator()->translate('mkt_credentials-requirements.fields.is_active'));
     }
 }
