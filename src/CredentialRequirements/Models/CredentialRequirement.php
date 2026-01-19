@@ -7,6 +7,7 @@ namespace Marktic\Credentials\CredentialRequirements\Models;
 use Marktic\Credentials\AbstractBase\Models\CredentialsRecord;
 use Marktic\Credentials\AbstractBase\Models\HasParent\HasParentRecord;
 use Marktic\Credentials\AbstractBase\Models\HasTenant\HasTenantRecord;
+use Marktic\Credentials\CredentialTypes\ModelsRelated\HasCredentialType\HasCredentialTypeRecordTrait;
 
 /**
  * Class CredentialRequirement
@@ -16,6 +17,7 @@ class CredentialRequirement extends CredentialsRecord
 {
     use HasTenantRecord;
     use HasParentRecord;
+    use HasCredentialTypeRecordTrait;
 
     public $name = null;
     public $lead = null;

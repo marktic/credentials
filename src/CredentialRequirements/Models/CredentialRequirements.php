@@ -7,6 +7,7 @@ namespace Marktic\Credentials\CredentialRequirements\Models;
 use Marktic\Credentials\AbstractBase\Models\CredentialsRepository;
 use Marktic\Credentials\AbstractBase\Models\HasParent\HasParentRepository;
 use Marktic\Credentials\AbstractBase\Models\HasTenant\HasTenantRepository;
+use Marktic\Credentials\CredentialTypes\ModelsRelated\HasCredentialType\HasCredentialTypeRepositoryTrait;
 
 /**
  * Class CredentialRequirements
@@ -14,7 +15,7 @@ use Marktic\Credentials\AbstractBase\Models\HasTenant\HasTenantRepository;
  */
 class CredentialRequirements extends CredentialsRepository
 {
-    use HasTenantRepository, HasParentRepository {
+    use HasTenantRepository, HasParentRepository, HasCredentialTypeRepositoryTrait {
         HasTenantRepository::initRelations insteadof HasParentRepository;
     }
 
@@ -26,6 +27,7 @@ class CredentialRequirements extends CredentialsRepository
     {
         $this->initRelationsCredentialsTenant();
         $this->initRelationsCredentialsParentRecord();
+        $this->initRelationsCredentialType();
     }
 
     /**

@@ -5,7 +5,7 @@ namespace Marktic\Credentials\CredentialTypes\ModelsRelated\HasCredentialType;
 
 use Marktic\Credentials\Utility\CredentialsModels;
 
-trait HasCredentialTypesTrait
+trait HasCredentialTypeRepositoryTrait
 {
     public const RELATION_CREDENTIAL_TYPE = 'CredentialType';
 
