@@ -28,17 +28,17 @@ class DetailsForm extends AbstractForm
         $this->initializeRequiresApproval();
         $this->initializeIsActive();
 
-        $this->addButton('save', translator()->trans('submit'));
+        $this->addButton('save', translator()->translate('general.buttons.save'));
     }
 
     protected function initializeName()
     {
-        $this->addInput('name', translator()->trans('name'), true);
+        $this->addInput('name', translator()->translate('general.fields.name'), true);
     }
 
     protected function initializeLead()
     {
-        $this->addTextarea('lead', translator()->trans('lead'));
+        $this->addTextarea('lead', translator()->translate('general.fields.description'));
     }
 
     protected function initializeCredentialType()
@@ -46,7 +46,7 @@ class DetailsForm extends AbstractForm
         $types = CredentialsModels::typesClass();
         $items = $types->findAll();
 
-        $this->addSelect('credential_type_id', translator()->trans('credential_type'), true);
+        $this->addSelect('credential_type_id', translator()->translate('general.fields.type'), true);
         foreach ($items as $item) {
             $this->getElement('credential_type_id')->addOption($item->getName(), $item->id);
         }
@@ -54,16 +54,16 @@ class DetailsForm extends AbstractForm
 
     protected function initializeIsMandatory()
     {
-        $this->addCheckbox('is_mandatory', translator()->trans('is_mandatory'));
+        $this->addCheckbox('is_mandatory', translator()->translate('general.fields.mandatory'));
     }
 
     protected function initializeRequiresApproval()
     {
-        $this->addCheckbox('requires_approval', translator()->trans('requires_approval'));
+        $this->addCheckbox('requires_approval', translator()->translate('general.fields.requires_approval'));
     }
 
     protected function initializeIsActive()
     {
-        $this->addCheckbox('is_active', translator()->trans('is_active'));
+        $this->addCheckbox('is_active', translator()->translate('general.fields.active'));
     }
 }
