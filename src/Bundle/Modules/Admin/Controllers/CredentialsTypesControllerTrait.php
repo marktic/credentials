@@ -7,15 +7,15 @@ namespace Marktic\Credentials\Bundle\Modules\Admin\Controllers;
 use Marktic\Credentials\Utility\CredentialsModels;
 
 /**
- * Trait CredentialSubmissionsControllerTrait
+ * Trait CredentialTypesControllerTrait
  * @package Marktic\Credentials\Bundle\Modules\Admin\Controllers
  */
-trait CredentialSubmissionsControllerTrait
+trait CredentialsTypesControllerTrait
 {
     use AbstractCredentialsControllerTrait;
 
     protected function generateModelName(): string
     {
-        return CredentialsModels::submissionsClass();
+        return CredentialsModels::typesClass();
     }
 }

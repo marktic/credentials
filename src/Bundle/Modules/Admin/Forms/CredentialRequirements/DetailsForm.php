@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Marktic\Credentials\Bundle\Admin\Forms\CredentialRequirements;
+namespace Marktic\Credentials\Bundle\Modules\Admin\Forms\CredentialRequirements;
 
+use Marktic\Credentials\Bundle\Library\Form\FormModel;
 use Marktic\Credentials\CredentialRequirements\Models\CredentialRequirement;
 use Marktic\Credentials\Utility\CredentialsModels;
 
@@ -13,7 +14,7 @@ use Marktic\Credentials\Utility\CredentialsModels;
  *
  * @method CredentialRequirement getModel()
  */
-class DetailsForm extends AbstractForm
+class DetailsForm extends FormModel
 {
     public function initialize()
     {
@@ -28,17 +29,17 @@ class DetailsForm extends AbstractForm
         $this->initializeRequiresApproval();
         $this->initializeIsActive();
 
-        $this->addButton('save', translator()->translate('general.buttons.save'));
+        $this->addButton('save', translator()->trans('save'));
     }
 
     protected function initializeName()
     {
-        $this->addInput('name', translator()->translate('mkt_credentials-requirements.fields.name'), true);
+        $this->addInput('name', translator()->trans('name'), true);
     }
 
     protected function initializeLead()
     {
-        $this->addTextarea('lead', translator()->translate('mkt_credentials-requirements.fields.lead'));
+        $this->addTextarea('lead', translator()->trans('lead'));
     }
 
     protected function initializeCredentialType()
@@ -46,7 +47,7 @@ class DetailsForm extends AbstractForm
         $types = CredentialsModels::typesClass();
         $items = $types->findAll();
 
-        $this->addSelect('credential_type_id', translator()->translate('mkt_credentials-requirements.fields.credential_type'), true);
+        $this->addSelect('credential_type_id', translator()->trans('mkt_credentials-requirements.fields.credential_type'), true);
         foreach ($items as $item) {
             $this->getElement('credential_type_id')->addOption($item->id, $item->getName());
         }
@@ -54,7 +55,7 @@ class DetailsForm extends AbstractForm
 
     protected function initializeIsMandatory()
     {
-        $this->addCheckbox('is_mandatory', translator()->translate('mkt_credentials-requirements.fields.is_mandatory'));
+        $this->addCheckbox('is_mandatory', translator()->trans('mkt_credentials-requirements.fields.is_mandatory'));
     }
 
     protected function initializeRequiresApproval()
@@ -64,6 +65,6 @@ class DetailsForm extends AbstractForm
 
     protected function initializeIsActive()
     {
-        $this->addCheckbox('is_active', translator()->translate('mkt_credentials-requirements.fields.is_active'));
+        $this->addCheckbox('is_active', translator()->trans('mkt_credentials-requirements.fields.is_active'));
     }
 }

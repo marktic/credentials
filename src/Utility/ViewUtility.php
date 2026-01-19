@@ -12,15 +12,13 @@ use Nip\View\View;
  */
 class ViewUtility
 {
-    /**
-     * Register view paths for the credentials package
-     *
-     * @param View $view
-     * @param string $module
-     * @return void
-     */
-    public static function registerViewPaths(View $view, string $module = 'admin'): void
+    public const NAMESPACE = 'MktCredentials';
+
+
+    public static function registerAdminPaths(View $view)
     {
-        $view->addPath(dirname(__DIR__, 2) . '/resources/views/' . $module);
+        $path = PathsHelpers::viewsAdmin();
+        $view->addPath($path, self::NAMESPACE);
+        $view->addPath($path);
     }
 }

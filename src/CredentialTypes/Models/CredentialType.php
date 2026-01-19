@@ -12,4 +12,25 @@ use Marktic\Credentials\AbstractBase\Models\CredentialsRecord;
  */
 class CredentialType extends CredentialsRecord
 {
+    public $name = null;
+    public $label = null;
+
+    public $description = null;
+
+    public $is_active = null;
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    public function isActive(): bool
+    {
+        return (bool)$this->is_active;
+    }
 }

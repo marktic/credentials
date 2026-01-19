@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\Bundle\Modules\Admin\Controllers;
 
-use ByTIC\Controllers\Behaviors\CrudModels;
-use ByTIC\Controllers\Behaviors\HasForms;
-use ByTIC\Controllers\Behaviors\HasModels;
 use Marktic\Credentials\Utility\ViewUtility;
 use Nip\Controllers\Response\ResponsePayload;
 use Nip\View\View;
@@ -19,9 +16,6 @@ use Nip\View\View;
  */
 trait AbstractCredentialsControllerTrait
 {
-    use CrudModels;
-    use HasForms;
-    use HasModels;
 
     /**
      * Register view paths for the credentials package
@@ -33,6 +27,6 @@ trait AbstractCredentialsControllerTrait
     {
         parent::registerViewPaths($view);
 
-        ViewUtility::registerViewPaths($view, 'admin');
+        ViewUtility::registerAdminPaths($view);
     }
 }

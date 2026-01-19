@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\Bundle\Modules\Admin\Controllers;
 
-use Marktic\Credentials\Bundle\Admin\Forms\CredentialRequirements\DetailsForm;
+use Marktic\Credentials\Bundle\Modules\Admin\Forms\CredentialRequirements\DetailsForm;
 use Marktic\Credentials\CredentialRequirements\Models\CredentialRequirement;
 use Marktic\Credentials\Utility\CredentialsModels;
 
@@ -12,7 +12,7 @@ use Marktic\Credentials\Utility\CredentialsModels;
  * Trait CredentialRequirementsControllerTrait
  * @package Marktic\Credentials\Bundle\Modules\Admin\Controllers
  */
-trait CredentialRequirementsControllerTrait
+trait CredentialsRequirementsControllerTrait
 {
     use AbstractCredentialsControllerTrait;
 
