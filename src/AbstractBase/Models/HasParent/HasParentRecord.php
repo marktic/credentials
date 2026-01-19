@@ -22,5 +22,6 @@ trait HasParentRecord
     {
         $this->parent_id = $record->id;
         $this->parent_type = $record->getManager()->getMorphName();
+        $this->getRelation('ParentRecord')->setResults($record);
     }
 }

@@ -22,5 +22,6 @@ trait HasTenantRecord
     {
         $this->tenant_id = $record->id;
         $this->tenant = $record->getManager()->getMorphName();
+        $this->getRelation('Tenant')->setResults($record);
     }
 }
