@@ -40,7 +40,7 @@ trait HasTenantControllerTrait
      */
     protected function getCredentialsTenantFromRequest()
     {
-        $tenantName = $this->getRequest()->get('tenant');
+        $tenantName = $this->getRequest()->get('tenant_type');
         return $this->checkForeignModelFromRequest($tenantName, ['tenant_id', 'id']);
     }
 

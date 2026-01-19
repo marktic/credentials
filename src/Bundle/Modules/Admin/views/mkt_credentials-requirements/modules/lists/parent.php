@@ -29,7 +29,9 @@ $requirementsRepository = CredentialsModels::requirements();
     <?php foreach ($items as $item): ?>
         <tr>
             <td>
-                <?= $item->getName(); ?>
+                <a href="<?= $item->getURL() ?>" class="record-link">
+                    <?= $item->getName(); ?>
+                </a>
             </td>
             <td>
                 <?= $item->getLead(); ?>

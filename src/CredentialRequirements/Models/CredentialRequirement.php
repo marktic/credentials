@@ -24,12 +24,12 @@ class CredentialRequirement extends CredentialsRecord
     public $requires_approval = null;
     public $is_active = null;
 
-    public function getName(): null
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function getLead(): null
+    public function getLead(): ?string
     {
         return $this->lead;
     }

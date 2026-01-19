@@ -13,7 +13,7 @@ use Nip\Records\Record;
 trait HasTenantRecord
 {
     public string|int|null $tenant_id;
-    public string|null $tenant;
+    public string|null $tenant_type;
 
     /**
      * @param Record $record
@@ -21,7 +21,7 @@ trait HasTenantRecord
     public function populateFromTenant($record)
     {
         $this->tenant_id = $record->id;
-        $this->tenant = $record->getManager()->getMorphName();
+        $this->tenant_type = $record->getManager()->getMorphName();
         $this->getRelation('Tenant')->setResults($record);
     }
 }
