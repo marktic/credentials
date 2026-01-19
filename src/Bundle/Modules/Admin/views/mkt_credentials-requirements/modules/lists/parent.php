@@ -19,6 +19,7 @@ $requirementsRepository = CredentialsModels::requirements();
     <thead>
     <tr>
         <th><?= translator()->trans('name'); ?></th>
+        <th><?= CredentialsModels::types()->getLabel('title.singular') ?></th>
         <th><?= translator()->trans('lead'); ?></th>
         <th><?= $requirementsRepository->getLabel('fields.is_active'); ?></th>
         <th><?= $requirementsRepository->getLabel('fields.is_mandatory'); ?></th>
@@ -32,6 +33,9 @@ $requirementsRepository = CredentialsModels::requirements();
                 <a href="<?= $item->getURL() ?>" class="record-link">
                     <?= $item->getName(); ?>
                 </a>
+            </td>
+            <td>
+                <?= $item->getCredentialType()->getName(); ?>
             </td>
             <td>
                 <?= $item->getLead(); ?>

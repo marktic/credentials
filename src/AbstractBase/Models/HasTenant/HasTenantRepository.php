@@ -21,6 +21,6 @@ trait HasTenantRepository
 
     protected function initRelationsCredentialsTenant(): void
     {
-        $this->morphTo('Tenant', ['morphPrefix' => 'tenant', 'morphTypeField' => 'tenant']);
+        $this->morphTo('Tenant', ['morphPrefix' => 'tenant']);
     }
 }

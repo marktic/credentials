@@ -83,7 +83,7 @@ class DetailsForm extends FormModel
     protected function getDataFromModel()
     {
         parent::getDataFromModel();
-        foreach ([] as $field) {
+        foreach (['is_mandatory', 'requires_approval', 'is_active'] as $field) {
             $value = $this->getModel()->{$field} ? 'yes' : 'no';
             $this->getElement($field)->setValue($value);
         }

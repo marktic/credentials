@@ -21,6 +21,6 @@ trait HasParentRepository
 
     protected function initRelationsCredentialsParentRecord(): void
     {
-        $this->morphTo('ParentRecord', ['morphPrefix' => 'parent', 'morphTypeField' => 'parent']);
+        $this->morphTo('ParentRecord', ['morphPrefix' => 'parent']);
     }
 }
