@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Marktic\Credentials\CredentialRequirements\Models;
 
 use Marktic\Credentials\AbstractBase\Models\CredentialsRecord;
+use Marktic\Credentials\AbstractBase\Models\HasTenant\HasTenantRecord;
 
 /**
  * Class CredentialRequirement
@@ -12,4 +13,37 @@ use Marktic\Credentials\AbstractBase\Models\CredentialsRecord;
  */
 class CredentialRequirement extends CredentialsRecord
 {
+    use HasTenantRecord;
+
+    public $name = null;
+    public $lead = null;
+
+    public $is_mandatory = null;
+    public $requires_approval = null;
+    public $is_active = null;
+
+    public function getName(): null
+    {
+        return $this->name;
+    }
+
+    public function getLead(): null
+    {
+        return $this->lead;
+    }
+
+    public function isMandatory(): bool
+    {
+        return $this->is_mandatory == '1';
+    }
+
+    public function requiresApproval(): bool
+    {
+        return $this->requires_approval == '1';
+    }
+
+    public function isActive(): bool
+    {
+        return $this->is_active == '1';
+    }
 }

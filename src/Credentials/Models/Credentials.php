@@ -19,22 +19,6 @@ class Credentials extends CredentialsRepository
     /**
      * @inheritDoc
      */
-    protected function generateTable(): string
-    {
-        return self::TABLE;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function generateController(): string
-    {
-        return self::CONTROLLER;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function getModelNamespace(): string
     {
         return __NAMESPACE__;

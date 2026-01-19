@@ -16,20 +16,9 @@ class CredentialTypes extends CredentialsRepository
 
     public const CONTROLLER = 'mkt_credentials-types';
 
-    /**
-     * @inheritDoc
-     */
-    protected function generateTable(): string
+    public function findActive()
     {
-        return self::TABLE;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function generateController(): string
-    {
-        return self::CONTROLLER;
+        return $this->findByField('is_active', 1);
     }
 
     /**

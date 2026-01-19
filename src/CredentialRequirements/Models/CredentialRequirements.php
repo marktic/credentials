@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Marktic\Credentials\CredentialRequirements\Models;
 
 use Marktic\Credentials\AbstractBase\Models\CredentialsRepository;
+use Marktic\Credentials\Bundle\Modules\Admin\Controllers\Behaviours\HasTenantControllerTrait;
 
 /**
  * Class CredentialRequirements
@@ -12,25 +13,11 @@ use Marktic\Credentials\AbstractBase\Models\CredentialsRepository;
  */
 class CredentialRequirements extends CredentialsRepository
 {
+    use HasTenantControllerTrait;
+
     public const TABLE = 'mkt_credential_requirements';
 
     public const CONTROLLER = 'mkt_credentials-requirements';
-
-    /**
-     * @inheritDoc
-     */
-    protected function generateTable(): string
-    {
-        return self::TABLE;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function generateController(): string
-    {
-        return self::CONTROLLER;
-    }
 
     /**
      * @inheritDoc

@@ -1,5 +1,6 @@
 <?php
 
+use Marktic\Credentials\AbstractBase\Actions\BoolPropertyLabel;
 use Marktic\Credentials\CredentialTypes\Models\CredentialType;
 
 /** @var CredentialType $item */
@@ -15,9 +16,7 @@ $item = $item ?? null;
         <?= $item->getLabel(); ?>
     </td>
     <td>
-        <span class="badge text-bg-<?= $item->isActive() ? 'success' : 'secondary' ?>">
-            <?= $item->isActive() ? 'Active' : 'Inactive' ?>
-        </span>
+        <?= BoolPropertyLabel::html($item->isActive()); ?>
     </td>
     <td>
     </td>

@@ -39,6 +39,15 @@ trait BaseRepositoryTrait
         return $this->getTable();
     }
 
+    protected function generateTable(): string
+    {
+        if (\defined('static::TABLE')) {
+            return static::TABLE;
+        }
+
+        return $this->getTable();
+    }
+
     protected function getTranslateRoot()
     {
         return $this->getController();
