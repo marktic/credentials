@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Marktic\Credentials\CredentialRequirements\Models;
 
 use Marktic\Credentials\AbstractBase\Models\CredentialsRepository;
+use Marktic\Credentials\AbstractBase\Models\HasParent\HasParentRepository;
 use Marktic\Credentials\AbstractBase\Models\HasTenant\HasTenantRepository;
 
 /**
@@ -13,7 +14,9 @@ use Marktic\Credentials\AbstractBase\Models\HasTenant\HasTenantRepository;
  */
 class CredentialRequirements extends CredentialsRepository
 {
-    use HasTenantRepository;
+    use HasTenantRepository, HasParentRepository {
+        HasTenantRepository::initRelations insteadof HasParentRepository;
+    }
 
     public const TABLE = 'mkt_credential_requirements';
 
@@ -22,12 +25,7 @@ class CredentialRequirements extends CredentialsRepository
     protected function initRelationsCredentials(): void
     {
         $this->initRelationsCredentialsTenant();
-        $this->initRelationsCredentialsParent();
-    }
-
-    protected function initRelationsCredentialsParent(): void
-    {
-        $this->morphTo('ParentRecord', ['morphPrefix' => 'parent', 'morphTypeField' => 'parent']);
+        $this->initRelationsCredentialsParentRecord();
     }
 
     /**

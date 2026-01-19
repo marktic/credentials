@@ -39,29 +39,29 @@ class DetailsForm extends FormModel
 
     protected function initializeLead()
     {
-        $this->addTextarea('lead', translator()->trans('lead'));
+        $this->addTextSimpleEditor('lead', translator()->trans('lead'));
     }
 
     protected function initializeCredentialType()
     {
-        $types = CredentialsModels::types();
-        $items = $types->findAll();
+        $typesRepository = CredentialsModels::types();
+        $items = $typesRepository->findAll();
 
-        $this->addSelect('credential_type_id', translator()->trans('mkt_credentials-requirements.fields.credential_type'), true);
+        $this->addSelect('credential_type_id', $typesRepository->getLabel('title.singular'), true);
         $credentialTypeElement = $this->getElement('credential_type_id');
         foreach ($items as $item) {
-            $credentialTypeElement->addOption($item->id, $item->getName());
+            $credentialTypeElement->addOption($item->id, $item->getLabel());
         }
     }
 
     protected function initializeIsMandatory()
     {
-        $this->initializeBooleanField('is_mandatory','is_active');
+        $this->initializeBooleanField('is_mandatory','is_mandatory');
     }
 
     protected function initializeRequiresApproval()
     {
-        $this->initializeBooleanField('requires_approval', 'is_active');
+        $this->initializeBooleanField('requires_approval', 'requires_approval');
     }
 
     protected function initializeIsActive()
@@ -71,8 +71,11 @@ class DetailsForm extends FormModel
 
     protected function initializeBooleanField(string $fieldName, string $labelKey): void
     {
-        $this->addBsRadioGroup($fieldName, $this->getModelManager()->getLabel($labelKey));
+        $this->addRadioGroup($fieldName, $this->getModelManager()->getLabel('fields.'.$labelKey));
+
         $element = $this->getElement($fieldName);
+        $element->getRenderer()->setSeparator('');
+
         $element->addOption('yes', translator()->trans('yes'));
         $element->addOption('no', translator()->trans('no'));
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Marktic\Credentials\CredentialRequirements\Models;
 
 use Marktic\Credentials\AbstractBase\Models\CredentialsRecord;
+use Marktic\Credentials\AbstractBase\Models\HasParent\HasParentRecord;
 use Marktic\Credentials\AbstractBase\Models\HasTenant\HasTenantRecord;
 
 /**
@@ -14,6 +15,7 @@ use Marktic\Credentials\AbstractBase\Models\HasTenant\HasTenantRecord;
 class CredentialRequirement extends CredentialsRecord
 {
     use HasTenantRecord;
+    use HasParentRecord;
 
     public $name = null;
     public $lead = null;

@@ -15,7 +15,12 @@ trait HasTenantControllerTrait
     {
         /** @var HasTenantRecord $record */
         $record = parent::addNewModel();
+        $record = $this->addNewModelFromTenant($record);
+        return $record;
+    }
 
+    protected function addNewModelFromTenant($record)
+    {
         $tenant = $this->getCredentialsTenantFromRequest();
         $record->populateFromTenant($tenant);
         return $record;
@@ -25,7 +30,7 @@ trait HasTenantControllerTrait
     protected function getRequestFilters($session = null)
     {
         $request = $this->getRequest();
-        $request->setAttribute(TenantFilter::NAME, $this->getSequenceTenantFromRequest());
+        $request->setAttribute(TenantFilter::NAME, $this->getCredentialsTenantFromRequest());
         /** @var Session $filter */
         return parent::getRequestFilters($session);
     }
