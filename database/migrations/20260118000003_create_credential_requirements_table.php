@@ -23,9 +23,9 @@ final class CreateCredentialRequirementsTable extends AbstractMigration
         if ($this->hasTable($table_name)) {
             return;
         }
-        $table = $this->table($table_name);
-        $table
-            ->addColumn('credential_type_id', 'biginteger', ['null' => false])
+        $this->table($table_name, ['primary_key' => 'id', 'id' => false])
+            ->addColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+            ->addColumn('credential_type_id', 'integer', ['null' => false, 'signed' => false])
             ->addColumn('tenant_type', 'string', ['limit' => 50, 'null' => false])
             ->addColumn('tenant_id', 'biginteger', ['null' => false])
             ->addColumn('parent_type', 'string', ['limit' => 50, 'null' => false])

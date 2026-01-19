@@ -23,10 +23,12 @@ final class CreateCredentialCredentialsTable extends AbstractMigration
         if ($this->hasTable($table_name)) {
             return;
         }
-        $table = $this->table($table_name);
-        $table
-            ->addColumn('user_id', 'biginteger', ['null' => false])
-            ->addColumn('credential_type_id', 'biginteger', ['null' => false])
+
+    $this->table($table_name, ['primary_key' => 'id', 'id' => false])
+            ->addColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+            ->addColumn('credential_type_id', 'integer', ['null' => false, 'signed' => false])
+            ->addColumn('parent_type', 'string', ['limit' => 50, 'null' => false])
+            ->addColumn('parent_id', 'biginteger', ['null' => false])
             ->addColumn('valid_from', 'date', ['null' => false])
             ->addColumn('valid_to', 'date', ['null' => true])
             ->addColumn('issuer', 'string', ['limit' => 255, 'null' => false])
@@ -41,10 +43,9 @@ final class CreateCredentialCredentialsTable extends AbstractMigration
             ->addColumn('created_at', 'timestamp', [
                 'default' => 'CURRENT_TIMESTAMP',
             ])
-            ->addIndex(['user_id'])
+            ->addIndex(['parent_type', 'parent_id'])
             ->addIndex(['credential_type_id'])
             ->addIndex(['valid_from', 'valid_to'])
-            ->addIndex(['user_id', 'credential_type_id'])
             ->addForeignKey('credential_type_id', 'mkt_credential_types', 'id')
             ->create();
     }

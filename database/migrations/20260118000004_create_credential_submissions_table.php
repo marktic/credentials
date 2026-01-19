@@ -23,10 +23,10 @@ final class CreateCredentialSubmissionsTable extends AbstractMigration
         if ($this->hasTable($table_name)) {
             return;
         }
-        $table = $this->table($table_name);
-        $table
-            ->addColumn('credential_credential_id', 'biginteger', ['null' => false])
-            ->addColumn('credential_requirement_id', 'biginteger', ['null' => false])
+        $this->table($table_name, ['primary_key' => 'id', 'id' => false])
+            ->addColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+            ->addColumn('credential_credential_id', 'biginteger', ['null' => false, 'signed' => false])
+            ->addColumn('credential_requirement_id', 'biginteger', ['null' => false, 'signed' => false])
             ->addColumn('parent_type', 'string', ['limit' => 50, 'null' => false])
             ->addColumn('parent_id', 'biginteger', ['null' => false])
             ->addColumn('submission_date', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
