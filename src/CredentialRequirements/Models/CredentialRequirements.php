@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\CredentialRequirements\Models;
 
-use Nip\Records\RecordManager;
+use Marktic\Credentials\AbstractBase\Models\CredentialsRepository;
 
 /**
  * Class CredentialRequirements
  * @package Marktic\Credentials\CredentialRequirements\Models
  */
-class CredentialRequirements extends RecordManager
+class CredentialRequirements extends CredentialsRepository
 {
-    use CredentialRequirementsTrait;
-
     public const TABLE = 'mkt_credential_requirements';
 
-    public const CONTROLLER = 'credentials-requirements';
+    public const CONTROLLER = 'mkt_credentials-requirements';
 
     /**
      * @inheritDoc

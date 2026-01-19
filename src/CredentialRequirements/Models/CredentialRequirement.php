@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\CredentialRequirements\Models;
 
-use Nip\Records\Record;
+use Marktic\Credentials\AbstractBase\Models\CredentialsRecord;
 
 /**
  * Class CredentialRequirement
  * @package Marktic\Credentials\CredentialRequirements\Models
  */
-class CredentialRequirement extends Record
+class CredentialRequirement extends CredentialsRecord
 {
-    use CredentialRequirementTrait;
 }

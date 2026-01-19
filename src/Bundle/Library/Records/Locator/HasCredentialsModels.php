@@ -9,7 +9,7 @@ use Marktic\Credentials\CredentialTypes\Models\CredentialTypes;
 use Marktic\Credentials\Utility\CredentialsModels;
 use Nip\Records\RecordManager;
 
-trait HasSequenceModels
+trait HasCredentialsModels
 {
     /**
      */

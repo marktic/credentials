@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\CredentialSubmissions\Models;
 
-use Nip\Records\RecordManager;
+use Marktic\Credentials\AbstractBase\Models\CredentialsRepository;
 
 /**
  * Class CredentialSubmissions
  * @package Marktic\Credentials\CredentialSubmissions\Models
  */
-class CredentialSubmissions extends RecordManager
+class CredentialSubmissions extends CredentialsRepository
 {
-    use CredentialSubmissionsTrait;
-
     public const TABLE = 'mkt_credential_submissions';
 
-    public const CONTROLLER = 'credentials-submissions';
+    public const CONTROLLER = 'mkt_credentials-submissions';
 
     /**
      * @inheritDoc

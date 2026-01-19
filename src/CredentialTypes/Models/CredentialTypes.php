@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\CredentialTypes\Models;
 
-use Nip\Records\RecordManager;
+use Marktic\Credentials\AbstractBase\Models\CredentialsRepository;
 
 /**
  * Class CredentialTypes
  * @package Marktic\Credentials\CredentialTypes\Models
  */
-class CredentialTypes extends RecordManager
+class CredentialTypes extends CredentialsRepository
 {
-    use CredentialTypesTrait;
-
     public const TABLE = 'mkt_credential_types';
 
-    public const CONTROLLER = 'credentials-types';
+    public const CONTROLLER = 'mkt_credentials-types';
 
     /**
      * @inheritDoc
