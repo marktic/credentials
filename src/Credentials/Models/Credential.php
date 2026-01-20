@@ -7,6 +7,7 @@ namespace Marktic\Credentials\Credentials\Models;
 use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use ByTIC\MediaLibrary\UrlGenerator\BaseUrlGenerator;
 use Marktic\Credentials\AbstractBase\Models\CredentialsRecord;
 use Marktic\Credentials\AbstractBase\Models\HasParent\HasParentRecord;
 use Marktic\Credentials\CredentialTypes\ModelsRelated\HasCredentialType\HasCredentialTypeRecordTrait;
@@ -30,6 +31,21 @@ class Credential extends CredentialsRecord implements HasMedia
             return $this->name;
         }
         return 'File #' . $this->id;
+    }
+
+    public function getFile()
+    {
+        $fileCollection = $this->getFiles();
+        return $fileCollection->first();
+    }
+
+    public function getFileUrl(): ?BaseUrlGenerator
+    {
+        $file = $this->getFile();
+        if (!$file) {
+            return null;
+        }
+        return $file->getUrl();
     }
 
     /**
