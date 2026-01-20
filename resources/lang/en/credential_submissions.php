@@ -5,6 +5,10 @@ return [
     'mkt_credentials-submissions.labels.title.singular' => 'Credential Submission',
     'mkt_credentials-submissions.labels.add' => 'Add Submission',
 
+    'mkt_credentials-submissions.types.pending' => 'În așteptare',
+    'mkt_credentials-submissions.types.approved' => 'Aprobat',
+    'mkt_credentials-submissions.types.rejected' => 'Respins',
+
     'mkt_credentials-submissions.messages.add' => 'The Credential Submission has been added successfully.',
     'mkt_credentials-submissions.messages.edit' => 'The Credential Submission has been updated successfully.',
     'mkt_credentials-submissions.messages.delete' => 'The Credential Submission has been deleted successfully.',

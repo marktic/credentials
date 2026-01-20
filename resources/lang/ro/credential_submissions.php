@@ -5,6 +5,10 @@ return [
     'mkt_credentials-submissions.labels.title.singular' => 'Trimitere de acreditare',
     'mkt_credentials-submissions.labels.add' => 'Adaugă trimitere',
 
+    'mkt_credentials-submissions.types.pending' => 'În așteptare',
+    'mkt_credentials-submissions.types.approved' => 'Aprobat',
+    'mkt_credentials-submissions.types.rejected' => 'Respins',
+
     'mkt_credentials-submissions.messages.add' => 'Trimiterea de acreditare a fost adăugată cu succes.',
     'mkt_credentials-submissions.messages.edit' => 'Trimiterea de acreditare a fost actualizată cu succes.',
     'mkt_credentials-submissions.messages.delete' => 'Trimiterea de acreditare a fost ștersă cu succes.',

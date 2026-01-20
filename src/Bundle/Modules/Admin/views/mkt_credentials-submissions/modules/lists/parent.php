@@ -7,7 +7,7 @@ use Marktic\Credentials\Utility\CredentialsModels;
 use Nip\Records\Collections\Associated;
 
 /** @var CredentialSubmission[]|Associated $items */
-$items = $this->credentialsRequirements;
+$items = $this->credentialsSubmissions;
 $submissionsRepository = CredentialsModels::submissions();
 $requirementsRepository = CredentialsModels::requirements();
 ?>
@@ -20,20 +20,30 @@ $requirementsRepository = CredentialsModels::requirements();
 <table class="table table-striped">
     <thead>
     <tr>
-        <th><?= $requirementsRepository->getLabel('title.singular') ?></th>
-        <th><?= $requirementsRepository->getLabel('fields.is_mandatory'); ?></th>
-        <th><?= $requirementsRepository->getLabel('fields.requires_approval'); ?></th>
         <th></th>
         <th><?= translator()->trans('status'); ?></th>
+        <th><?= $requirementsRepository->getLabel('title.singular') ?></th>
+        <th><?= $requirementsRepository->getLabel('fields.requires_approval'); ?></th>
+        <th><?= $requirementsRepository->getLabel('fields.is_mandatory'); ?></th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
         <?php $requirement = $item->getCredentialRequirement(); ?>
         <tr>
+
             <td>
-                <a href="<?= $requirement->getURL() ?>" class="record-link">
-                    <?= $requirement->getName(); ?>
+                <a href="<?= $item->getURL() ?>" class="btn btn-xs btn-outline-primary record-link">
+                    View
+                </a>
+            </td>
+            <td>
+                <?= $item->getStatus()->getLabelHtml(); ?>
+            </td>
+            <td>
+                <?= $requirement->getName(); ?>
+                <a href="<?= $requirement->getURL() ?>" class="btn btn-xs btn-flat btn-info">
+                    ?
                 </a>
             </td>
             <td>
@@ -41,14 +51,6 @@ $requirementsRepository = CredentialsModels::requirements();
             </td>
             <td>
                 <?= BoolPropertyLabel::html($requirement->requiresApproval()); ?>
-            </td>
-            <td>
-                <a href="<?= $item->getURL() ?>" class="btn btn-sm btn-primary">
-                    View
-                </a>
-            </td>
-            <td>
-                <?= $item->getStatusLabelHtml(); ?>
             </td>
         </tr>
     <?php endforeach; ?>

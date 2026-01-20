@@ -6,7 +6,7 @@ use Marktic\Credentials\Credentials\Models\Credential;
 use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmissions;
 
 /**
- * @method Credential getCredentialType()
+ * @method Credential getCredentialRecord()
  */
 trait HasCredentialRecordTrait
 {

@@ -14,6 +14,14 @@ trait CredentialsSubmissionsControllerTrait
 {
     use AbstractCredentialsControllerTrait;
 
+    public function view()
+    {
+        $item = $this->getModelFromRequest();
+        $this->payload()->with([
+            'item' => $item
+        ]);
+    }
+
     protected function generateModelName(): string
     {
         return CredentialsModels::submissionsClass();
