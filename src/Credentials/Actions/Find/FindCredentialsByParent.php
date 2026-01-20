@@ -6,7 +6,7 @@ namespace Marktic\Credentials\Credentials\Actions\Find;
 
 use Bytic\Actions\Behaviours\Entities\FindRecords;
 use Bytic\Actions\Behaviours\HasSubject\HasSubject;
-use Marktic\Credentials\CredentialRequirements\Actions\AbstractAction;
+use Marktic\Credentials\Credentials\Actions\AbstractAction;
 
 class FindCredentialsByParent extends AbstractAction
 {

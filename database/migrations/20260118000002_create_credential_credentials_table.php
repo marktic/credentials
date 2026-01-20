@@ -29,6 +29,7 @@ final class CreateCredentialCredentialsTable extends AbstractMigration
             ->addColumn('credential_type_id', 'integer', ['null' => false, 'signed' => false])
             ->addColumn('parent_type', 'string', ['limit' => 50, 'null' => false])
             ->addColumn('parent_id', 'biginteger', ['null' => false])
+            ->addColumn('name', 'string', ['null' => true])
             ->addColumn('valid_from', 'date', ['null' => false])
             ->addColumn('valid_to', 'date', ['null' => true])
             ->addColumn('issuer', 'string', ['limit' => 255, 'null' => false])

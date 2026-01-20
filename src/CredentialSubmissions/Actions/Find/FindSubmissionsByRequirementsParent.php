@@ -7,8 +7,8 @@ namespace Marktic\Credentials\CredentialSubmissions\Actions\Find;
 use Bytic\Actions\Behaviours\Entities\FindRecords;
 use Bytic\Actions\Behaviours\HasReturn\HasReturn;
 use Bytic\Actions\Behaviours\HasSubject\HasSubject;
+use Marktic\Credentials\CredentialRequirements\Actions\Find\FindRequirementsByParent;
 use Marktic\Credentials\CredentialSubmissions\Actions\AbstractAction;
-use Marktic\Credentials\CredentialRequirements\Actions\Find\FindCredentialsByParent;
 use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmission;
 use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmissions;
 use Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Statuses\Approved;
@@ -58,16 +58,16 @@ class FindSubmissionsByRequirementsParent extends AbstractAction
         $collection->loadRelation(CredentialSubmissions::RELATION_CREDENTIAL_REQUIREMENT);
 //        $collection->loadRelation(CredentialSubmissions::RELATION_PARENT_RECORD);
 
-        $collection->keyBy('credential_requirement_id');
+        $collection = $collection->keyBy('credential_requirement_id');
         $requirements = $this->getRequirements();
         foreach ($requirements as $requirement) {
             if ($collection->has($requirement->id)) {
                 continue;
             }
             $submission = $this->createNewSubmission($requirement);
-            $collection->add($submission, $requirement->id);
+            $collection->add($submission, 'credential_requirement_id');
         }
-        return $collection;
+        $this->setReturn($collection);
     }
 
     protected function findParams(): array
@@ -96,7 +96,7 @@ class FindSubmissionsByRequirementsParent extends AbstractAction
 
     protected function findRequirements()
     {
-        return FindCredentialsByParent
+        return FindRequirementsByParent
             ::for($this->requirementsParent)
             ->thatIsActive()
             ->fetch();

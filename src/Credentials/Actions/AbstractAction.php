@@ -4,12 +4,12 @@ namespace Marktic\Credentials\Credentials\Actions;
 
 use Bytic\Actions\Action;
 use Bytic\Actions\Behaviours\Entities\HasRepository;
-use Marktic\Credentials\CredentialRequirements\Models\CredentialRequirements;
+use Marktic\Credentials\Credentials\Models\Credentials;
 use Marktic\Credentials\Utility\CredentialsModels;
 use Nip\Records\AbstractModels\RecordManager;
 
 /**
- * @method CredentialRequirements getRepository
+ * @method Credentials getRepository
  */
 abstract class AbstractAction extends Action
 {
