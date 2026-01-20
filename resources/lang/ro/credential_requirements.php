@@ -5,6 +5,10 @@ return [
     'mkt_credentials-requirements.labels.title.singular' => 'Cerință de acreditare',
     'mkt_credentials-requirements.labels.add' => 'Adaugă cerință',
 
+    'mkt_credentials-requirements.labels.is_mandatory' => 'Obligatoriu',
+    'mkt_credentials-requirements.labels.requires_approval' => 'Necesită aprobare',
+
+
     'mkt_credentials-requirements.labels.fields.is_mandatory' => 'Este obligatoriu',
     'mkt_credentials-requirements.labels.fields.requires_approval' => 'Necesită aprobare',
     'mkt_credentials-requirements.labels.fields.is_active' => 'Este activ',

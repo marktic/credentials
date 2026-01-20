@@ -5,6 +5,9 @@ return [
     'mkt_credentials-requirements.labels.title.singular' => 'Credential Requirement',
     'mkt_credentials-requirements.labels.add' => 'Add Requirement',
 
+    'mkt_credentials-requirements.labels.is_mandatory' => 'Mandatory',
+    'mkt_credentials-requirements.labels.requires_approval' => 'Requires Approval',
+
     'mkt_credentials-requirements.labels.fields.is_mandatory' => 'Is Mandatory',
     'mkt_credentials-requirements.labels.fields.requires_approval' => 'Requires Approval',
     'mkt_credentials-requirements.labels.fields.is_active' => 'Is Active',
