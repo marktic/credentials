@@ -20,6 +20,7 @@ class CredentialSubmission extends CredentialsRecord
     use HasParentRecord;
     use HasCredentialRecordTrait;
     use HasCredentialRequirementRecordTrait;
+    use HasParentRecord;
     use HasMembershipStatusesRecordTrait;
 
     public function isSubmitted(): bool

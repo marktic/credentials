@@ -2,17 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Marktic\Credentials\CredentialRequirements\Actions\Find;
+namespace Marktic\Credentials\CredentialSubmissions\Actions\Find;
 
 use Bytic\Actions\Behaviours\Entities\FindRecords;
 use Bytic\Actions\Behaviours\HasReturn\HasReturn;
 use Bytic\Actions\Behaviours\HasSubject\HasSubject;
-use Marktic\Credentials\CredentialRequirements\Actions\AbstractAction;
+use Marktic\Credentials\CredentialSubmissions\Actions\AbstractAction;
+use Marktic\Credentials\CredentialRequirements\Actions\Find\FindCredentialsByParent;
 use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmission;
 use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmissions;
 use Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Statuses\Approved;
-use Nip\Records\AbstractModels\Record;
+use Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Statuses\Pending;
+use Nip\Records\Collections\Associated;
 
+/**
+ * @method CredentialSubmission[]|Associated getReturn()
+ */
 class FindSubmissionsByRequirementsParent extends AbstractAction
 {
     use FindRecords;
@@ -50,8 +55,8 @@ class FindSubmissionsByRequirementsParent extends AbstractAction
     protected function populateReturn()
     {
         $collection = $this->getReturn();
-        $collection->populateRelation(CredentialSubmissions::RELATION_CREDENTIAL_REQUIREMENT);
-        $collection->populateRelation(CredentialSubmissions::RELATION_PARENT_RECORD);
+        $collection->loadRelation(CredentialSubmissions::RELATION_CREDENTIAL_REQUIREMENT);
+//        $collection->loadRelation(CredentialSubmissions::RELATION_PARENT_RECORD);
 
         $collection->keyBy('credential_requirement_id');
         $requirements = $this->getRequirements();
@@ -91,7 +96,7 @@ class FindSubmissionsByRequirementsParent extends AbstractAction
 
     protected function findRequirements()
     {
-        return FindRequirementsByParent
+        return FindCredentialsByParent
             ::for($this->requirementsParent)
             ->thatIsActive()
             ->fetch();
@@ -108,8 +113,7 @@ class FindSubmissionsByRequirementsParent extends AbstractAction
             $submission->setSubmittedBy($this->submittedBy);
         }
 
-        $submission->setStatus(Approved::NAME);
-
+        $submission->setStatus(Pending::NAME);
 
         return $submission;
     }

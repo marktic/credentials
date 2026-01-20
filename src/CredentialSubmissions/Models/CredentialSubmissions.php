@@ -19,6 +19,7 @@ class CredentialSubmissions extends CredentialsRepository
     use HasParentRepository;
     use HasCredentialRequirementRepositoryTrait;
     use HasCredentialRecordRepositoryTrait;
+    use HasParentRepository;
     use HasMembershipStatusesRepositoryTrait;
 
     public const TABLE = 'mkt_credential_submissions';
@@ -38,8 +39,9 @@ class CredentialSubmissions extends CredentialsRepository
 
     protected function initRelationsCredentials(): void
     {
-        $this->initRelationsCredentialsParentRecord();
+        $this->initRelationsCredentialRecord();
         $this->initRelationsCredentialRequirement();
+        $this->initRelationsCredentialsParentRecord();
     }
 
     /**

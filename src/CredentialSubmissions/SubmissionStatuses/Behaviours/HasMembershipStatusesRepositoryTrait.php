@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Behaviours;
 
 use ByTIC\Models\SmartProperties\RecordsTraits\HasStatus\RecordsTrait;
-use KM42\Membership\Domain\Memberships\MembershipStatuses\Statuses\AbstractStatus;
+use Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Statuses\AbstractStatus;
 
 /**
  *
