@@ -8,4 +8,9 @@ use Nip\Records\Record;
 
 class CredentialsRecord extends Record
 {
+
+    public function getRegistry()
+    {
+        // TODO: Implement getRegistry() method.
+    }
 }

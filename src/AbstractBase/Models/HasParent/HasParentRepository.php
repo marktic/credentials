@@ -8,6 +8,8 @@ namespace Marktic\Credentials\AbstractBase\Models\HasParent;
  */
 trait HasParentRepository
 {
+    public const RELATION_PARENT_RECORD = 'ParentRecord';
+
     public function initRelations()
     {
         parent::initRelations();
@@ -21,6 +23,6 @@ trait HasParentRepository
 
     protected function initRelationsCredentialsParentRecord(): void
     {
-        $this->morphTo('ParentRecord', ['morphPrefix' => 'parent']);
+        $this->morphTo(self::RELATION_PARENT_RECORD, ['morphPrefix' => 'parent']);
     }
 }

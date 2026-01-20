@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\Bundle\Modules\Admin\Controllers;
 
-use Marktic\Credentials\CredentialRequirements\Actions\Find\FindRequirementsByParent;
+use Marktic\Credentials\CredentialRequirements\Actions\Find\FindSubmissionsByRequirementsParent;
 use Marktic\Credentials\Utility\CredentialsModels;
 
 /**
@@ -17,7 +17,7 @@ trait CredentialsRequirementsParentControllerTrait
 
     protected function populateCredentialsRequirements($parent)
     {
-        $requirements = FindRequirementsByParent::for($parent)->fetch();
+        $requirements = FindSubmissionsByRequirementsParent::for($parent)->fetch();
         $credentialsRequirementsAdd = CredentialsModels::requirements()->compileURL('add', [
             'parent_type' => $parent->getManager()->getMorphName(),
             'parent_id' => $parent->id,
