@@ -17,6 +17,7 @@ class CredentialRequirements extends CredentialsRepository
 {
     use HasTenantRepository, HasParentRepository, HasCredentialTypeRepositoryTrait {
         HasTenantRepository::initRelations insteadof HasParentRepository;
+        HasTenantRepository::initRelations insteadof HasCredentialTypeRepositoryTrait;
     }
 
     public const TABLE = 'mkt_credential_requirements';

@@ -35,7 +35,7 @@ $requirementsRepository = CredentialsModels::requirements();
                 </a>
             </td>
             <td>
-                <?= $item->getCredentialType()->getName(); ?>
+                <?= $item->getCredentialType()->getLabel(); ?>
             </td>
             <td>
                 <?= $item->getLead(); ?>
