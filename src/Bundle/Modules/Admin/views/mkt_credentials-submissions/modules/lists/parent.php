@@ -31,7 +31,8 @@ $requirementsRepository = CredentialsModels::requirements();
     <?php foreach ($items as $item): ?>
         <?php
         $requirement = $item->getCredentialRequirement();
-        $credentialFile = $item->getFile();
+        $credential = $item->getCredentialRecord();
+        $credentialFile = $credential->getFile();
         ?>
         <tr>
 
@@ -57,7 +58,7 @@ $requirementsRepository = CredentialsModels::requirements();
             </td>
             <td>
                 <?php if ($credentialFile) : ?>
-                    <a href="<?= $credentialFile->getURL(); ?>" class="" target="_blank">
+                    <a href="<?= $credentialFile->getURL(); ?>" class="btn btn-xs btn-flat btn-info" target="_blank">
                         View FILE
                     </a>
                 <?php else: ?>
