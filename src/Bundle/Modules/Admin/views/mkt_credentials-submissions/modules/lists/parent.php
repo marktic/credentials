@@ -29,7 +29,10 @@ $requirementsRepository = CredentialsModels::requirements();
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
-        <?php $requirement = $item->getCredentialRequirement(); ?>
+        <?php
+        $requirement = $item->getCredentialRequirement();
+        $credentialFile = $item->getFile();
+        ?>
         <tr>
 
             <td>
@@ -51,6 +54,15 @@ $requirementsRepository = CredentialsModels::requirements();
             </td>
             <td>
                 <?= BoolPropertyLabel::html($requirement->requiresApproval()); ?>
+            </td>
+            <td>
+                <?php if ($credentialFile) : ?>
+                    <a href="<?= $credentialFile->getURL(); ?>" class="" target="_blank">
+                        View FILE
+                    </a>
+                <?php else: ?>
+                ---
+                <?php endif; ?>
             </td>
         </tr>
     <?php endforeach; ?>

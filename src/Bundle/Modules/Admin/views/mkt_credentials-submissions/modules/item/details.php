@@ -13,6 +13,8 @@ $parentRecord = $item->getParentRecord();
 $credentialRequirement = $item->getCredentialRequirement();
 $credential = $item->getCredentialRecord();
 $credentialFile = $credential->getFile();
+
+$statuses = $this->statuses ?? [];
 ?>
 <table class="table table-striped">
     <tbody>
@@ -42,6 +44,26 @@ $credentialFile = $credential->getFile();
         </td>
         <td>
             <?= $item->getStatus()->getLabelHTML(); ?>
+
+
+            <div class="dropdown float-end">
+                <a class="btn dropdown-toggle btn-xs btn-primary" data-bs-toggle="dropdown" href="#">
+                    <i class="fas fa-edit"></i>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <?php foreach ($statuses as $status) { ?>
+                        <?php if ($status->getName() != $item->getStatus()->getName()) { ?>
+                            <li>
+                                <a href="<?= $item->getChangeStatusURL(['status' => $status->getName()]); ?>"
+                                   class="dropdown-item">
+                                    <?= $status->getLabel(); ?>
+                                </a>
+                            </li>
+                        <?php } ?>
+                    <?php } ?>
+                </ul>
+            </div>
         </td>
     </tr>
     <tr>
