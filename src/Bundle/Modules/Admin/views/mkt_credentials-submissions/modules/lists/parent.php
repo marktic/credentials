@@ -10,20 +10,14 @@ use Nip\Records\Collections\Associated;
 $items = $this->credentialsSubmissions;
 $submissionsRepository = CredentialsModels::submissions();
 $requirementsRepository = CredentialsModels::requirements();
+
+$statuses = $submissionsRepository->getStatuses();
 ?>
 
 <?php if ($items->count() === 0): ?>
     <?= $this->Messages()->info($submissionsRepository->getMessage('dnx')); ?>
     <?php return; ?>
 <?php endif; ?>
-
-<?php
-// Collect available statuses for dropdown (from controller or repository)
-$statuses = $this->statuses ?? [];
-if (empty($statuses) && method_exists($submissionsRepository, 'getStatuses')) {
-    $statuses = $submissionsRepository->getStatuses();
-}
-?>
 
 <table class="table table-striped">
     <thead>

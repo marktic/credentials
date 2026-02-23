@@ -6,9 +6,9 @@ $requirementsRepository = CredentialsModels::requirements();
 ?>
 <thead>
 <tr>
+    <th><?= translator()->trans('parent'); ?></th>
     <th></th>
     <th><?= translator()->trans('status'); ?></th>
-    <th><?= translator()->trans('parent'); ?></th>
     <th><?= $requirementsRepository->getLabel('title.singular'); ?></th>
     <th><?= $requirementsRepository->getLabel('fields.is_mandatory'); ?></th>
     <th><?= $requirementsRepository->getLabel('fields.requires_approval'); ?></th>

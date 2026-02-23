@@ -1,1 +1,1 @@
-<?= $this->load('/abstract/index'); ?>
+<?= $this->load('/abstract/index',['add' => false]); ?>

@@ -16,25 +16,21 @@ if ($parent) {
 ?>
 <tr>
     <td>
-        <a href="<?= $item->getURL(); ?>" class="btn btn-xs btn-outline-primary record-link">">
+        <?php if ($parentName): ?>
+            <a href="<?= $parent->getURL(); ?>" class="record-link" title="<?= htmlspecialchars($parentName); ?>">
+                <?= $parentName; ?>
+            </a>
+        <?php else: ?>
+            ---
+        <?php endif; ?>
+    </td>
+    <td>
+        <a href="<?= $item->getURL(); ?>" class="btn btn-xs btn-outline-primary record-link">
             View
         </a>
     </td>
     <td>
         <?= $item->getStatus()->getLabelHtml(); ?>
-    </td>
-    <td>
-        <?php if ($parentName): ?>
-            <?php if (method_exists($parent, 'getURL')): ?>
-                <a href="<?= $parent->getURL(); ?>" class="record-link" title="<?= htmlspecialchars($parentName); ?>">
-                    <?= $parentName; ?>
-                </a>
-            <?php else: ?>
-                <?= $parentName; ?>
-            <?php endif; ?>
-        <?php else: ?>
-            ---
-        <?php endif; ?>
     </td>
     <td>
         <?php if ($requirement): ?>
