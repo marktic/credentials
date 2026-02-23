@@ -17,6 +17,14 @@ $requirementsRepository = CredentialsModels::requirements();
     <?php return; ?>
 <?php endif; ?>
 
+<?php
+// Collect available statuses for dropdown (from controller or repository)
+$statuses = $this->statuses ?? [];
+if (empty($statuses) && method_exists($submissionsRepository, 'getStatuses')) {
+    $statuses = $submissionsRepository->getStatuses();
+}
+?>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -42,7 +50,27 @@ $requirementsRepository = CredentialsModels::requirements();
                 </a>
             </td>
             <td>
-                <?= $item->getStatus()->getLabelHtml(); ?>
+                <?= $item->getStatus()->getLabelHTML(); ?>
+                <?php if (!empty($statuses)) : ?>
+                    <div class="dropdown d-inline-block ms-1">
+                        <a class="btn dropdown-toggle btn-xs btn-primary" data-bs-toggle="dropdown" href="#">
+                            <i class="fas fa-edit"></i>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <?php foreach ($statuses as $status) { ?>
+                                <?php if ($status->getName() != $item->getStatus()->getName()) { ?>
+                                    <li>
+                                        <a href="<?= $item->getChangeStatusURL(['status' => $status->getName()]); ?>"
+                                           class="dropdown-item">
+                                            <?= $status->getLabel(); ?>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
             </td>
             <td>
                 <?= $requirement->getName(); ?>
