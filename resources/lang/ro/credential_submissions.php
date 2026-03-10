@@ -13,4 +13,12 @@ return [
     'mkt_credentials-submissions.messages.edit' => 'Trimiterea de acreditare a fost actualizată cu succes.',
     'mkt_credentials-submissions.messages.delete' => 'Trimiterea de acreditare a fost ștersă cu succes.',
     'mkt_credentials-submissions.messages.dnx' => 'Nu există trimiteri de acreditări disponibile.',
+
+    'mkt_credentials-submissions.validate.no_pending' => 'Nu există trimiteri în așteptare de validat.',
+    'mkt_credentials-submissions.validate.no_file' => 'Niciun fișier trimis.',
+    'mkt_credentials-submissions.validate.approve' => 'Aprobă',
+    'mkt_credentials-submissions.validate.reject' => 'Respinge',
+    'mkt_credentials-submissions.validate.skip' => 'Sari peste',
+    'mkt_credentials-submissions.validate.confirm_approve' => 'Ești sigur că vrei să aprobi această trimitere?',
+    'mkt_credentials-submissions.validate.confirm_reject' => 'Ești sigur că vrei să respingi această trimitere?',
 ];

@@ -8,6 +8,10 @@ use Marktic\Credentials\Bundle\Modules\Admin\Controllers\Behaviours\HasParentRec
 use Marktic\Credentials\CredentialRequirements\Actions\Find\FindRequirementsByParent;
 use Marktic\Credentials\CredentialRequirements\Models\CredentialRequirement;
 use Marktic\Credentials\CredentialSubmissions\Actions\Create\CreateSubmission;
+use Marktic\Credentials\CredentialSubmissions\Actions\Find\FindOldestPendingSubmission;
+use Marktic\Credentials\CredentialSubmissions\Actions\Update\ApproveSubmission;
+use Marktic\Credentials\CredentialSubmissions\Actions\Update\RejectSubmission;
+use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmission;
 use Marktic\Credentials\Utility\CredentialsModels;
 
 /**
@@ -28,6 +32,37 @@ trait CredentialsSubmissionsControllerTrait
         $this->initViewStatuses();
         $this->payload()->with([
             'item' => $item
+        ]);
+    }
+
+    public function validate(): void
+    {
+        $submissionsRepository = CredentialsModels::submissions();
+
+        $skip = array_values(array_filter(array_map('intval', (array) $this->getRequest()->get('skip', []))));
+
+        $action = $this->getRequest()->get('action');
+        $itemId = (int) $this->getRequest()->get('item_id');
+
+        if ($action && $itemId > 0) {
+            $submission = $submissionsRepository->findOneById($itemId);
+            if ($submission instanceof CredentialSubmission) {
+                if ($action === 'approve') {
+                    ApproveSubmission::for($submission)->execute();
+                } elseif ($action === 'reject') {
+                    RejectSubmission::for($submission)->execute();
+                }
+            }
+            $validateUrl = $submissionsRepository->compileURL('validate', !empty($skip) ? ['skip' => $skip] : []);
+            $this->redirect($validateUrl);
+            return;
+        }
+
+        $item = (new FindOldestPendingSubmission())->excludingIds($skip)->fetch();
+
+        $this->payload()->with([
+            'item' => $item,
+            'skip' => $skip,
         ]);
     }
 
