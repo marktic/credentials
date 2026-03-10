@@ -19,7 +19,6 @@ trait CredentialsSubmissionsParentControllerTrait
     protected function populateCredentialsSubmissions($parent): void
     {
         $submissions = FindSubmissionsByParent::for($parent)->fetch();
-        $requirements = FindRequirementsByParent::for($parent)->thatIsActive()->fetch();
 
         $credentialsSubmissionsAdd = CredentialsModels::submissions()->compileURL('add', [
             'parent_type' => $parent->getManager()->getMorphName(),
@@ -34,10 +33,13 @@ trait CredentialsSubmissionsParentControllerTrait
     }
 
     /**
-     * @deprecated Use populateCredentialsSubmissions() instead.
      */
     protected function populateCredentialsRequirements($parent): void
     {
-        $this->populateCredentialsSubmissions($parent);
+        $requirements = FindRequirementsByParent::for($parent)->thatIsActive()->fetch();
+
+        $this->payload()->with([
+            'credentialsRequirements' => $requirements,
+        ]);
     }
 }

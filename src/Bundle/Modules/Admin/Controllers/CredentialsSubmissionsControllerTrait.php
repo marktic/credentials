@@ -96,7 +96,7 @@ trait CredentialsSubmissionsControllerTrait
         if (!$requirementId) {
             return null;
         }
-        $requirement = CredentialsModels::requirements()->findOneById($requirementId);
+        $requirement = CredentialsModels::requirements()->findOne($requirementId);
         return ($requirement instanceof CredentialRequirement) ? $requirement : null;
     }
 

@@ -28,11 +28,8 @@ $formAction = $submissionsRepository->compileURL('add', [
     <div class="row">
         <div class="col-md-8">
             <?php
-            $card = Card::make()
-                ->withView($this)
-                ->withTitle($submissionsRepository->getLabel('title.singular'))
-                ->withIcon(Icons::plus());
-            echo $card->open();
+//                ->withTitle($submissionsRepository->getLabel('title.singular'))
+//                ->withIcon(Icons::plus());
             ?>
             <form action="<?= $formAction ?>"
                   method="POST"
@@ -94,7 +91,6 @@ $formAction = $submissionsRepository->compileURL('add', [
                     <?php endif; ?>
                 </div>
             </form>
-            <?php echo $card->close(); ?>
         </div>
     </div>
 </div>
