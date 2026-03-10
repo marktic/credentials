@@ -4,6 +4,7 @@ return [
     'mkt_credentials-submissions.labels.title' => 'Credential Submissions',
     'mkt_credentials-submissions.labels.title.singular' => 'Credential Submission',
     'mkt_credentials-submissions.labels.add' => 'Add Submission',
+    'mkt_credentials-submissions.labels.validate' => 'Validate Submissions',
 
     'mkt_credentials-submissions.types.pending' => 'În așteptare',
     'mkt_credentials-submissions.types.approved' => 'Aprobat',

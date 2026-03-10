@@ -28,7 +28,7 @@ class FindOldestPendingSubmission extends AbstractAction
             'where' => [
                 ['status = ?', Pending::NAME],
             ],
-            'order' => 'id ASC',
+            'order' => [['id','ASC']],
             'limit' => '1',
         ];
 
@@ -37,7 +37,7 @@ class FindOldestPendingSubmission extends AbstractAction
             $params['where'][] = ["id NOT IN ($ids)"];
         }
 
-        $result = $this->getRepository()->findOne($params);
+        $result = $this->getRepository()->findOneByParams($params);
 
         return ($result instanceof CredentialSubmission) ? $result : null;
     }

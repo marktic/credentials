@@ -45,12 +45,16 @@ trait CredentialsSubmissionsControllerTrait
         $itemId = (int) $this->getRequest()->get('item_id');
 
         if ($action && $itemId > 0) {
-            $submission = $submissionsRepository->findOneById($itemId);
+            $submission = $submissionsRepository->findOne($itemId);
             if ($submission instanceof CredentialSubmission) {
                 if ($action === 'approve') {
-                    ApproveSubmission::for($submission)->execute();
+                    ApproveSubmission::for($submission)
+                        ->withModerator($this->getUser())
+                        ->execute();
                 } elseif ($action === 'reject') {
-                    RejectSubmission::for($submission)->execute();
+                    RejectSubmission::for($submission)
+                        ->withModerator($this->getUser())
+                        ->execute();
                 }
             }
             $validateUrl = $submissionsRepository->compileURL('validate', !empty($skip) ? ['skip' => $skip] : []);
@@ -78,7 +82,7 @@ trait CredentialsSubmissionsControllerTrait
             if ($requirement === null) {
                 $requirementId = $this->getRequest()->get('credential_requirement_id');
                 $requirement = $requirementId
-                    ? CredentialsModels::requirements()->findOneById($requirementId)
+                    ? CredentialsModels::requirements()->findOne($requirementId)
                     : null;
             }
 

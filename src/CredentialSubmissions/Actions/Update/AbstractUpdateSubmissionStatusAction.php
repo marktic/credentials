@@ -18,6 +18,14 @@ abstract class AbstractUpdateSubmissionStatusAction extends AbstractAction
 {
     use HasSubject;
 
+    protected mixed $moderator = null;
+
+    public function withModerator(mixed $moderator): static
+    {
+        $this->moderator = $moderator;
+        return $this;
+    }
+
     /**
      * Returns the new status name to set on the submission.
      */
@@ -38,11 +46,16 @@ abstract class AbstractUpdateSubmissionStatusAction extends AbstractAction
         /** @var CredentialSubmission $submission */
         $submission = $this->getSubject();
         $submission->setStatus($this->getNewStatus());
+        $this->populateAdditionalFields();
         $submission->save();
 
         $eventClass = $this->getEventClass();
         $eventClass::dispatch($submission);
 
         return $submission;
+    }
+
+    protected function populateAdditionalFields(): void
+    {
     }
 }

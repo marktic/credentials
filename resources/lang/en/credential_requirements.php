@@ -8,6 +8,8 @@ return [
     'mkt_credentials-requirements.labels.is_mandatory' => 'Mandatory',
     'mkt_credentials-requirements.labels.requires_approval' => 'Requires Approval',
 
+    'mkt_credentials-requirements.labels.fields.name' => 'Name',
+    'mkt_credentials-requirements.labels.fields.lead' => 'Lead',
     'mkt_credentials-requirements.labels.fields.is_mandatory' => 'Is Mandatory',
     'mkt_credentials-requirements.labels.fields.requires_approval' => 'Requires Approval',
     'mkt_credentials-requirements.labels.fields.is_active' => 'Is Active',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Marktic\Credentials\CredentialSubmissions\Actions\Update;
 
 use Marktic\Credentials\CredentialSubmissions\Events\RejectedSubmission;
+use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmission;
 use Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Statuses\Rejected;
 
 /**
@@ -21,5 +22,15 @@ class RejectSubmission extends AbstractUpdateSubmissionStatusAction
     protected function getEventClass(): string
     {
         return RejectedSubmission::class;
+    }
+
+    protected function populateAdditionalFields(): void
+    {
+        /** @var CredentialSubmission $submission */
+        $submission = $this->getSubject();
+
+        if ($this->moderator !== null) {
+            $submission->setRejectedBy($this->moderator);
+        }
     }
 }

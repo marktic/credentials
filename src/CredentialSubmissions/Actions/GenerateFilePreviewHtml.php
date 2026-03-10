@@ -12,9 +12,9 @@ use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmission;
  * Generates an inline HTML preview of the submitted credential file.
  *
  * The preview type depends on the file extension:
- *  - Images        : <img> tag
- *  - PDF           : <embed> (full-page)
- *  - Office docs   : Google Docs Viewer iframe
+ *  - Images        : <img> tag with lazy loading
+ *  - PDF           : <iframe> or <object> with fallback
+ *  - Office docs   : Microsoft Office / Google Docs Viewer iframe
  *  - Video         : <video> tag
  *  - Audio         : <audio> tag
  *  - Plain text    : <pre> block (content read from disk)
@@ -90,7 +90,7 @@ class GenerateFilePreviewHtml extends AbstractAction
 
         return <<<HTML
 <div class="credential-file-preview credential-file-preview--image">
-    <img src="{$escapedUrl}" alt="{$escapedName}" class="img-fluid" style="max-width:100%;height:auto;" />
+    <img src="{$escapedUrl}" alt="{$escapedName}" class="img-fluid" loading="lazy" style="max-width:100%;height:auto;" />
 </div>
 HTML;
     }
@@ -101,10 +101,19 @@ HTML;
 
         return <<<HTML
 <div class="credential-file-preview credential-file-preview--pdf" style="width:100%;height:80vh;">
-    <embed src="{$escapedUrl}" type="application/pdf" width="100%" height="100%" />
-    <p class="mt-2">
+    <iframe src="{$escapedUrl}#view=FitH"
+            style="border:none;width:100%;height:100%;"
+            loading="lazy"
+            title="PDF Preview">
+        <object data="{$escapedUrl}" type="application/pdf" width="100%" height="100%">
+            <p>Your browser does not support PDFs.
+                <a href="{$escapedUrl}" target="_blank">Download the PDF</a>.
+            </p>
+        </object>
+    </iframe>
+    <p class="mt-2 text-center">
         <a href="{$escapedUrl}" target="_blank" class="btn btn-sm btn-outline-secondary">
-            Open in new tab
+            Open PDF in new tab
         </a>
     </p>
 </div>
@@ -113,22 +122,37 @@ HTML;
 
     private function renderOffice(string $url): string
     {
-        $viewerUrl = htmlspecialchars(
-            'https://docs.google.com/gview?embedded=true&url=' . rawurlencode($url),
+        $encodedUrl = rawurlencode($url);
+        $msViewerUrl = htmlspecialchars(
+            'https://view.officeapps.live.com/op/embed.aspx?src=' . $encodedUrl,
+            ENT_QUOTES
+        );
+        $googleViewerUrl = htmlspecialchars(
+            'https://docs.google.com/gview?embedded=true&url=' . $encodedUrl,
             ENT_QUOTES
         );
         $escapedUrl = htmlspecialchars($url, ENT_QUOTES);
 
         return <<<HTML
 <div class="credential-file-preview credential-file-preview--office" style="width:100%;height:80vh;">
-    <iframe src="{$viewerUrl}"
+    <iframe src="{$msViewerUrl}"
             style="border:none;width:100%;height:100%;"
             allowfullscreen
-            sandbox="allow-scripts allow-popups"></iframe>
-    <p class="mt-2">
+            loading="lazy"
+            title="Office Document Preview"
+            sandbox="allow-scripts allow-same-origin allow-popups">
+        <p>Your browser does not support iframes. 
+            <a href="{$escapedUrl}" target="_blank">Download file</a>.
+        </p>
+    </iframe>
+    <p class="mt-2 d-flex justify-content-between">
         <a href="{$escapedUrl}" target="_blank" class="btn btn-sm btn-outline-secondary">
             Download file
         </a>
+        <small class="text-muted">
+            Preview via Microsoft Office Online.
+            <a href="{$googleViewerUrl}" target="_blank" class="text-decoration-none">Try Google Docs Viewer</a>
+        </small>
     </p>
 </div>
 HTML;
@@ -141,7 +165,7 @@ HTML;
 
         return <<<HTML
 <div class="credential-file-preview credential-file-preview--video">
-    <video controls style="max-width:100%;width:100%;">
+    <video controls preload="metadata" style="max-width:100%;width:100%;">
         <source src="{$escapedUrl}" type="{$mime}" />
         Your browser does not support the video tag.
         <a href="{$escapedUrl}" target="_blank">Download video</a>
@@ -157,7 +181,7 @@ HTML;
 
         return <<<HTML
 <div class="credential-file-preview credential-file-preview--audio">
-    <audio controls style="width:100%;">
+    <audio controls preload="metadata" style="width:100%;">
         <source src="{$escapedUrl}" type="{$mime}" />
         Your browser does not support the audio element.
         <a href="{$escapedUrl}" target="_blank">Download audio</a>

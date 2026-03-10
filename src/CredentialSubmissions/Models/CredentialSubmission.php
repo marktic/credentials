@@ -35,5 +35,21 @@ class CredentialSubmission extends CredentialsRecord
         return $this;
     }
 
+    public function setApprovedBy($approvedBy): static
+    {
+        $approvedBy = $approvedBy instanceof Record ? $approvedBy->id : $approvedBy;
+        $this->approved_by = $approvedBy;
+        $this->approval_date = (string) date('Y-m-d H:i:s');
+        return $this;
+    }
+
+    public function setRejectedBy($rejectedBy): static
+    {
+        $rejectedBy = $rejectedBy instanceof Record ? $rejectedBy->id : $rejectedBy;
+        $this->rejected_by = $rejectedBy;
+        $this->rejection_date = (string) date('Y-m-d H:i:s');
+        return $this;
+    }
+
 
 }

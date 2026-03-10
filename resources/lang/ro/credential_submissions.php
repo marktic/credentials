@@ -4,6 +4,7 @@ return [
     'mkt_credentials-submissions.labels.title' => 'Trimiteri de acreditări',
     'mkt_credentials-submissions.labels.title.singular' => 'Trimitere de acreditare',
     'mkt_credentials-submissions.labels.add' => 'Adaugă trimitere',
+    'mkt_credentials-submissions.labels.validate' => 'Validare acreditări',
 
     'mkt_credentials-submissions.types.pending' => 'În așteptare',
     'mkt_credentials-submissions.types.approved' => 'Aprobat',
