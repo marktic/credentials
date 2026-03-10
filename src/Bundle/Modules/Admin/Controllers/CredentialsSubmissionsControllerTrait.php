@@ -48,14 +48,19 @@ trait CredentialsSubmissionsControllerTrait
             $submission = $submissionsRepository->findOne($itemId);
             if ($submission instanceof CredentialSubmission) {
                 if ($action === 'approve') {
-                    ApproveSubmission::for($submission)
-                        ->withModerator($this->getUser())
-                        ->execute();
+                    $domainAction = ApproveSubmission::for($submission);
                 } elseif ($action === 'reject') {
-                    RejectSubmission::for($submission)
-                        ->withModerator($this->getUser())
-                        ->execute();
+                    $domainAction = RejectSubmission::for($submission);
                 }
+
+                $user = null;
+                if (method_exists($this, 'getUser')) {
+                    $user = $this->getUser();
+                } elseif (method_exists($this, '_getUser')) {
+                   $user = $this->_getUser();
+                }
+                $domainAction->withModerator($user);
+                $domainAction->execute();
             }
             $validateUrl = $submissionsRepository->compileURL('validate', !empty($skip) ? ['skip' => $skip] : []);
             $this->redirect($validateUrl);
