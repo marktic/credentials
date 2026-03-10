@@ -9,6 +9,7 @@ use Marktic\Credentials\AbstractBase\Models\HasParent\HasParentRecord;
 use Marktic\Credentials\CredentialRequirements\ModelsRelated\HasCredentialRequirement\HasCredentialRequirementRecordTrait;
 use Marktic\Credentials\Credentials\ModelsRelated\HasCredential\HasCredentialRecordTrait;
 use Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Behaviours\HasMembershipStatusesRecordTrait;
+use Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Statuses\Approved;
 use Nip\Records\AbstractModels\Record;
 
 /**
@@ -26,6 +27,11 @@ class CredentialSubmission extends CredentialsRecord
     public function isSubmitted(): bool
     {
         return $this->id > 0;
+    }
+
+    public function isApproved(): bool
+    {
+        return $this->isSubmitted() && $this->getStatus()->getName() === Approved::NAME;
     }
 
     public function setSubmittedBy($submittedBy): static
