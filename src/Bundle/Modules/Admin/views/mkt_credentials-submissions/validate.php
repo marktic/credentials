@@ -1,5 +1,6 @@
 <?php
 
+use Marktic\Credentials\CredentialSubmissions\Actions\GenerateFilePreviewHtml;
 use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmission;
 use Marktic\Credentials\Utility\CredentialsModels;
 
@@ -22,8 +23,6 @@ $skip = $this->skip ?? [];
 <?php else: ?>
     <?php
     $credentialRequirement = $item->getCredentialRequirement();
-    $credential = $item->getCredentialRecord();
-    $credentialFile = $credential ? $credential->getFile() : null;
 
     $validateBaseUrl = $submissionsRepository->compileURL('validate');
 
@@ -69,13 +68,7 @@ $skip = $this->skip ?? [];
                         <?= translator()->trans('file'); ?>
                     </div>
                     <div class="card-body">
-                        <?php if ($credentialFile): ?>
-                            <a href="<?= $credentialFile->getURL(); ?>" class="btn btn-info" target="_blank">
-                                <?= translator()->trans('view_file'); ?>
-                            </a>
-                        <?php else: ?>
-                            <span class="text-muted"><?= translator()->trans('mkt_credentials-submissions.validate.no_file'); ?></span>
-                        <?php endif; ?>
+                        <?= GenerateFilePreviewHtml::for($item)->generate(); ?>
                     </div>
                 </div>
 

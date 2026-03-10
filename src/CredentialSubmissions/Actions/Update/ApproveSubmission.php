@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Marktic\Credentials\CredentialSubmissions\Actions\Update;
 
 use Marktic\Credentials\CredentialSubmissions\Events\ApprovedSubmission;
-use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmission;
 use Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Statuses\Approved;
 
 /**
@@ -19,8 +18,8 @@ class ApproveSubmission extends AbstractUpdateSubmissionStatusAction
         return Approved::NAME;
     }
 
-    protected function dispatchEvent(CredentialSubmission $submission): void
+    protected function getEventClass(): string
     {
-        ApprovedSubmission::dispatch($submission);
+        return ApprovedSubmission::class;
     }
 }

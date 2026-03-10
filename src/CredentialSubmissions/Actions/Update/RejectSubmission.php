@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Marktic\Credentials\CredentialSubmissions\Actions\Update;
 
 use Marktic\Credentials\CredentialSubmissions\Events\RejectedSubmission;
-use Marktic\Credentials\CredentialSubmissions\Models\CredentialSubmission;
 use Marktic\Credentials\CredentialSubmissions\SubmissionStatuses\Statuses\Rejected;
 
 /**
@@ -19,8 +18,8 @@ class RejectSubmission extends AbstractUpdateSubmissionStatusAction
         return Rejected::NAME;
     }
 
-    protected function dispatchEvent(CredentialSubmission $submission): void
+    protected function getEventClass(): string
     {
-        RejectedSubmission::dispatch($submission);
+        return RejectedSubmission::class;
     }
 }
