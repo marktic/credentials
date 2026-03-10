@@ -13,4 +13,12 @@ return [
     'mkt_credentials-submissions.messages.edit' => 'The Credential Submission has been updated successfully.',
     'mkt_credentials-submissions.messages.delete' => 'The Credential Submission has been deleted successfully.',
     'mkt_credentials-submissions.messages.dnx' => 'There are no Credential Submissions available.',
+
+    'mkt_credentials-submissions.validate.no_pending' => 'There are no pending submissions to validate.',
+    'mkt_credentials-submissions.validate.no_file' => 'No file submitted.',
+    'mkt_credentials-submissions.validate.approve' => 'Approve',
+    'mkt_credentials-submissions.validate.reject' => 'Reject',
+    'mkt_credentials-submissions.validate.skip' => 'Skip',
+    'mkt_credentials-submissions.validate.confirm_approve' => 'Are you sure you want to approve this submission?',
+    'mkt_credentials-submissions.validate.confirm_reject' => 'Are you sure you want to reject this submission?',
 ];
