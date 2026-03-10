@@ -4,30 +4,18 @@ declare(strict_types=1);
 
 namespace Marktic\Credentials\CredentialSubmissions\Dto;
 
-class SubmissionRequirementDtoCollection
+use Nip\Collections\Typed\ClassCollection;
+
+/**
+ * @method SubmissionRequirementDTO[] all()
+ */
+class SubmissionRequirementDtoCollection extends ClassCollection
 {
-    /** @var SubmissionRequirementDTO[] */
-    private array $items = [];
-
-    public function add(SubmissionRequirementDTO $dto): void
-    {
-        $this->items[] = $dto;
-    }
-
-    /** @return SubmissionRequirementDTO[] */
-    public function all(): array
-    {
-        return $this->items;
-    }
-
-    public function count(): int
-    {
-        return count($this->items);
-    }
+    protected $validClass = SubmissionRequirementDTO::class;
 
     public function areRequiredValidated(): bool
     {
-        foreach ($this->items as $dto) {
+        foreach ($this as $dto) {
             if ($dto->getRequirement()->isMandatory() && !$dto->hasValidSubmission()) {
                 return false;
             }
