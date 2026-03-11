@@ -1,5 +1,6 @@
 <?php
 
+use ByTIC\AdminBase\Screen\Actions\Dto\ButtonAction;
 use ByTIC\AdminBase\Widgets\Cards\Card;
 use ByTIC\Icons\Icons;
 use Marktic\Credentials\Utility\CredentialsModels;
@@ -15,7 +16,13 @@ $card = Card::make()
 if ($credentialParent) {
     $parentRepository = $credentialParent->getManager();
     $card
-        ->withTitle($parentRepository->getLabel('title.singular'))
+        ->withTitle($credentialParent->getName())
+        ->addHeaderTool(
+            ButtonAction::make()
+            ->setUrl($credentialParent->getURL())
+            ->addHtmlClass('btn-xs')
+            ->setLabel(translator()->trans('view'))
+        )
         ->withViewContent('/' . $parentRepository->getController() . '/modules/item/details', ['item' => $credentialParent]);
 } else {
     $card->withTitle(translator()->trans('No parent'));
